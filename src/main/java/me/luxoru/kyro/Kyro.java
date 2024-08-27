@@ -135,6 +135,7 @@ public class Kyro {
 
                     if (cancelled) {
                         response.setResponseCode(ResponseCode.FORBIDDEN);
+                        response.setResponseCode(null);
                         jsonObject.addProperty("success", false);
                         jsonObject.addProperty("error", "Request has been cancelled internally");
                         sendResponse(exchange, response, jsonObject);

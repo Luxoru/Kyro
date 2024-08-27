@@ -1,6 +1,7 @@
 package me.luxoru.kyro.response;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 /**
@@ -17,7 +18,7 @@ import lombok.Setter;
  *
  * @author Luxoru
  */
-@Setter
+
 @Getter
 public class Response {
 
@@ -28,5 +29,13 @@ public class Response {
      * </p>
      */
     private ResponseCode responseCode = ResponseCode.OK;
+
+
+    public void setResponseCode(@NonNull ResponseCode responseCode) {
+        if(responseCode == null){
+            throw new NullPointerException("responsecode marked as non-null but it null");
+        }
+        this.responseCode = responseCode;
+    }
 
 }
