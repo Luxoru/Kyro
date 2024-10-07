@@ -5,6 +5,7 @@ import com.sun.net.httpserver.HttpExchange;
 import lombok.Getter;
 import me.luxoru.kyro.util.HTTPUtils;
 
+import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.net.URI;
 import java.util.Collections;
@@ -25,6 +26,7 @@ public class Request {
     private final Headers headers;
     private final Map<String, String> parameters;
     private final RequestMethod method;
+    private final InputStream body;
 
     /**
      * Constructs a new {@code Request} object.
@@ -33,6 +35,7 @@ public class Request {
      */
     public Request(HttpExchange httpExchange) {
         this.httpExchange = httpExchange;
+        this.body = httpExchange.getRequestBody();
         this.headers = httpExchange.getRequestHeaders();
         this.parameters = Collections.unmodifiableMap(HTTPUtils.getParameters(httpExchange.getRequestURI().getQuery()));
         this.method = RequestMethod.fromName(httpExchange.getRequestMethod());
